@@ -47,7 +47,7 @@ router.post(
 try {
 
 //see if user exists
-let user = await User.findOne({email}); //fid user based on email
+let user = await User.findOne({email}); //find user based on email
 
 if(user) {
  return res.status(400).json({errors: [{msg: 'User already exist'}]});

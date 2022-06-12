@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ProfileSchema = new mongoose.Schema({
     user: {
         type : mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user'  //ref option tells mongoose which model to use during population
     },
     age: {
         type: Number,
@@ -50,11 +50,11 @@ const ProfileSchema = new mongoose.Schema({
                 type: String
             },
             from: {
-                type: Date,
+                type: String,
                 required: true
             },
             to: {
-                type: Date,
+                type: String,
                 // required: true
             },
             current: {

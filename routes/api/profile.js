@@ -15,7 +15,7 @@ const { status } = require('express/lib/response');
 //monggose return a promish so we have to use async here
 router.get('/me', auth, async (req, res) => {
   try {
-    //populate use to bring in the user name ans avatar
+    //populate use to bring in the user name and avatar
     const profile = await Profile.findOne({ user: req.user.id }).populate(
       'user',
       ['name', 'avatar']
