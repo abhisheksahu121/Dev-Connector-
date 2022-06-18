@@ -8,6 +8,7 @@ const { check, validationResult } = require('express-validator');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const { status } = require('express/lib/response');
+const { db } = require('../../models/Profile');
 //@route  Get api/profile/me
 // @desc  Get current user profile
 //@access Private
@@ -352,4 +353,7 @@ router.get('/github/:username', (req, res) => {
     }
 });
 
+// db.collection.aggregate( [
+//   { $count: "myCount" }
+// ])
 module.exports = router;

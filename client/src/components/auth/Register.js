@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from 'react';
+import {connect} from 'react-redux';  // so by using this connect package we are connect our component to redux 
 import {Link} from 'react-router-dom';
+import {setAlert} from '../../actions/alert';
 // import axios from 'axios';
-const Register = () => {
+const Register = (props) => {
   const [formDate, setFormData] = useState({
     name: '',
     email: '',
@@ -17,7 +19,8 @@ const Register = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if(password !== password2) {
-      console.log('Passwords do not match');
+      // console.log('Passwords do not match');
+      props.setAlert('Passwords do not match','danger');
     }else {
 
       console.log('SUCCESS')
@@ -46,6 +49,7 @@ const Register = () => {
   };
   return (
     <Fragment>
+      <div style={{marginTop:"60px"}}>
       <h1 name='large text-primary'>Sign Up</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Create Your Account
@@ -97,8 +101,10 @@ const Register = () => {
       <p className='my-1'>
         Already have an account? <Link to='/login'>Sign In</Link>
       </p>
+      </div>
     </Fragment>
   );
 };
 
-export default Register;
+//so the connect takes an two thinks one is any state that you want to match second is an object with any action that you want to use 
+export default connect(null,{setAlert})(Register); //it allow us to access propes.setAlert
