@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react';
 // import axios from 'axios';
-import {Link} from 'react-router-dom';
-const Login = () => {
+import {Link, Navigate} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {login} from '../../actions/auth';
+
+const Login = ({login, isAuthenticated}) => {
   const [formDate, setFormData] = useState({
     email: '',
     password: '',
@@ -14,7 +18,8 @@ const Login = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-      console.log('SUCCESS');
+    login(email, password)
+      // console.log('SUCCESS');
       // later do this stuff by redux 
       // const newUser = {
       //   name,
@@ -37,6 +42,11 @@ const Login = () => {
       //   console.error(err.response.data);
       // }
   };
+
+  //Redirect if logged in
+  if(isAuthenticated) {
+    return <Navigate to='/dashboard' />
+  }
   return (
     <Fragment>
       <div style={{marginTop:"60px"}}>
@@ -96,4 +106,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+}
+
+//by doing this we have bring in auth state bcs auth state has that is authenticated and that will give us everything from initialstate(in reducer/auth) 
+//but we need to check only isAuthenticated is null or not
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(mapStateToProps, {login})(Login);
