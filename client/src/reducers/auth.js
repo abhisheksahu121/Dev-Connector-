@@ -5,7 +5,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  ACCOUNT_DELETED
 } from "../actions/types";
 
 //thats our state for authentication
@@ -17,7 +18,7 @@ const initialState = {
   loading: true, //so here for example we load a user and see if user is authenticated now at this you want to make sure that the laoding is done
   //so we already made a request to backend and got a responce so for this we are going to set this true bydefault
   //and then once we make a request and get the data get the response then this set to false so we know that this benn loaded
-  user: null, //so when we request to the backend to api/auth and we get the user data including the name email avatar all that stuff the will get put here
+  user: null //so when we request to the backend to api/auth and we get the user data including the name email avatar all that stuff the will get put here
 };
 
 export default function (state = initialState, action) {
@@ -37,18 +38,19 @@ export default function (state = initialState, action) {
         ...state, //the sephrade oretator thells us whatever in current state thats return it
         ...payload,
         isAuthenticated: true,
-        loading: false, //bcs we gotte the responce and we loaded
+        loading: false //bcs we gotte the responce and we loaded
       };
     case REGISTER_FAIL:
     case AUTH_ERROR: //so in autherror that same thing will do and clear the localstorage if the token is not valid
     case LOGIN_FAIL:  
     case LOGOUT:
+    case ACCOUNT_DELETED:
     localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         isAuthenticated: false,
-        loading: false,
+        loading: false
       };
     default:
       return state;

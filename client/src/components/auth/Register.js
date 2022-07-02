@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';  // so by using this connect package we are connect our component to redux 
-import { Link,Navigate } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
@@ -25,7 +25,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       setAlert('Passwords do not match', 'danger');
     } else {
       //we  pass object with (name email password) and we can access these bcs we are pulling them out from the component state 'formData' 
-      register(name, email, password);
+      register({name, email, password});
       // console.log('SUCCESS')
       // later do this stuff by redux 
       // const newUser = {
@@ -52,12 +52,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   };
 
   if(isAuthenticated) {
-    return <Navigate to='/dashboard' />;
+    return <Redirect to='/dashboard' />;
   }
   return (
     <Fragment>
-      <div style={{ marginTop: "60px" }}>
-        <h1 name='large text-primary'>Sign Up</h1>
+      {/* <div style={{ marginTop: "60px" }}> */}
+        <h1 className='large text-primary'>Sign Up</h1>
         <p className='lead'>
           <i className='fas fa-user'></i> Create Your Account
         </p>
@@ -109,7 +109,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         <p className='my-1'>
           Already have an account? <Link to='/login'>Sign In</Link>
         </p>
-      </div>
+      {/* </div> */}
     </Fragment>
   );
 };

@@ -1,5 +1,5 @@
 //it just a function that takes an token if the token is there then added to the header if not then deleted from the header
-import axios from "axios";
+import axios from 'axios';
 
 const setAuthToken = (token) => {
   //here token as a parameter and we check for it that the token comes from localstorage or not
@@ -13,5 +13,6 @@ const setAuthToken = (token) => {
     delete axios.defaults.headers.common["x-auth-token"];
   }
 };
+
 
 export default setAuthToken;

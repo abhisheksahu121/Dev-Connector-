@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 // import axios from 'axios';
-import {Link, Navigate} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {login} from '../../actions/auth';
@@ -45,14 +45,14 @@ const Login = ({login, isAuthenticated}) => {
 
   //Redirect if logged in
   if(isAuthenticated) {
-    return <Navigate to='/dashboard' />
+    return <Redirect to='/dashboard' />
   }
   return (
     <Fragment>
-      <div style={{marginTop:"60px"}}>
-      <h1 name='large text-primary'>Sign In</h1>
+      {/* <div style={{marginTop:"60px"}}> */}
+      <h1 className='large text-primary'>Sign In</h1>
       <p className='lead'>
-        <i className='fas fa-user'></i> Sign in to your account
+        <i className='fas fa-user'></i> Sign in to your Account
       </p>
       <form className='form' onSubmit={e => onSubmit(e)}>
         {/* <div className='form-group'>
@@ -96,12 +96,12 @@ const Login = ({login, isAuthenticated}) => {
             required
           />
         </div> */}
-        <input type='submit' className='btn btn-primary' value='Register' />
+        <input type='submit' className='btn btn-primary' value='Login' />
       </form>
       <p className='my-1'>
         Do not have an account? <Link to='/register'>Sign Up</Link>
       </p>
-      </div>
+      {/* </div> */}
     </Fragment>
   );
 };

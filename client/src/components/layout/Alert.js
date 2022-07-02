@@ -6,11 +6,11 @@ import { connect } from "react-redux";
 //anything if the array is zero
 const Alert = ({ alerts }) =>
   alerts !== null && alerts.length > 0 && alerts.map(alert => (
-    <div className="container" style={{marginTop: "50px"}}>
+    // <div className="container" style={{marginTop: "50px"}}>
     <div key={alert.id} className={`alert alert-${alert.alertType}`}>
      {alert.msg}
      </div>
-     </div>
+    //  </div>
   ));
 
 Alert.propTypes = {
