@@ -1,31 +1,32 @@
 // when we are loged out we dont want to see dashboard in our screen so we can fix this  by using private route component for our dashboard
-import React,{Fragment} from "react";
-import { Route, Redirect, Switch,Router, } from "react-router-dom";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 const PrivateRoute = (
-  { component: Component, auth, ...rest } //we want to get ant other parameter that is passed in by using rest parameter
+  { component: Component, auth: { isAuthenticated, loading }, ...rest } //we want to get ant other parameter that is passed in by using rest parameter
 ) => (
-  <Router>
-    <Fragment>
-  <Switch>
-    <Route
-      {...rest}
-      render={props => //adding the render propes where we check to see if the user not authenticated and not loading if this true then we are going to redirect login
-        auth.isAuthenticated===true ? (
-          <Component {...props} />):(
-          <Redirect to="/login" /> 
-          )
-        // ) : (
-        //      //passd the component and props of that component
-        //   <Component {...props} /> //and is they are authenticated then the component will load
-        // )
-      }
-    />
-  </Switch>
-  </Fragment>
-  </Router>
+  //adding the render propes where we check to see if the user not authenticated and not loading if this true then we are going to redirect login
+  <Route
+    {...rest}
+    render={
+      (props) =>
+        !isAuthenticated && !loading ? (
+          <Redirect to="/login" />
+        ) : (
+          <Component {...props} />
+        )
+
+      // ) : (
+      //      //passd the component and props of that component
+      //   <Component {...props} /> //and is they are authenticated then the component will load
+      // )
+    }
+  />
+  // </Switch>
+  // </Fragment>
+  // </Route>
 );
 
 PrivateRoute.propTypes = {
@@ -36,7 +37,7 @@ PrivateRoute.propTypes = {
 const mapStateToPropes = (state) => ({
   auth: state.auth,
 });
-export default connect(null,mapStateToPropes)(PrivateRoute);
+export default connect(mapStateToPropes)(PrivateRoute);
 
 // import React from 'react';
 // import { Route, Redirect,Switch,Router } from 'react-router-dom';

@@ -9,7 +9,9 @@ const Landing = ({ isAuthenticated }) => {
     return <Redirect to="/dashboard" />;
   }
   return (
-    <section name="landing">
+    // <img src="https://ik.imagekit.io/ztmmkpjgc8h/showcase_qsj4_B660.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1656849409635" alt=" "></img>
+    
+    <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
           <h1 className="x-large">Developer Connector</h1>

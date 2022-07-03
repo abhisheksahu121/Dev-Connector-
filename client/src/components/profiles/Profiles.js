@@ -22,6 +22,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
       <h1 className="large text-primary">Developers</h1>
       <p className="lead">
         <i className="fab fa-connectdevlop"></i> Brows and connect with Developers
+        </p>
         <div className='profiles'>
         {profiles.length > 0 ? (
           profiles.map(profile => (
@@ -29,7 +30,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           ))
         ): <h4>No profiles found...</h4>}
         </div>
-      </p>
+    
     </Fragment>
 
     }
@@ -41,7 +42,7 @@ Profiles.propTypes = {
   profile: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { getProfiles })(Profiles);

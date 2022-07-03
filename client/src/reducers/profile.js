@@ -15,7 +15,7 @@ const initialState = {
   profiles: [], //empty array to begin with and show the list of all profile
   repos: [], //we need to fetch repos
   loading: true, //true bydefault once we make a request set it to false
-  error: {}, //error object for any error in the object
+  error: {} //error object for any error in the object
 };
 
 export default function (state = initialState, action) {
@@ -27,26 +27,26 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profile: payload,
-        loading: false,
+        loading: false
       };
     case GET_PROFILES:
       return {
         ...state,
         profiles: payload,
-        loading: false,
+        loading: false
       };
     case PROFILE_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false,
+        loading: false
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
         repos: [],
-        loading: false,
+        loading: false
       };
     case GET_REPOS:
         return{

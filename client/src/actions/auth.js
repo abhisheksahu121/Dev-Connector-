@@ -13,10 +13,10 @@ import {
 import setAuthToken from "../utils/setAuthToken";
 
 //Load User
-export const loaduser =
+export const loadUser = 
   () =>
   async (dispatch) => {
-    console.log(localStorage.token)
+    // console.log(localStorage.token)
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -57,7 +57,7 @@ export const register =
         //payload is gonna be a data that gonna be a token bcs got token for res.
         payload: res.data,
       });
-      dispatch(loaduser());
+      dispatch(loadUser());
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -72,7 +72,7 @@ export const register =
     }
   };
 
-//Login
+//Login User
 export const login = (email, password) => async (dispatch) => {
   //here we are sendin our data
   const config = {
@@ -91,7 +91,7 @@ export const login = (email, password) => async (dispatch) => {
       //payload is gonna be a data that gonna be a token bcs got token for res.
       payload: res.data,
     });
-    dispatch(loaduser());
+    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

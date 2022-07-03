@@ -1,6 +1,6 @@
 //we are gone to making request so bring in axios
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+// import  history from 'react-router-dom';
 import {setAlert} from './alert';
 
 import {
@@ -52,7 +52,7 @@ export const getProfiles = () => async dispatch => {
 // Get profile by ID
 export const getProfileById = userId => async dispatch => {
      //so one think i want to do that when user go to the profile list page i want to clear whatever in the current profile bcs when we visit single user profile its gonna go into the stage
-     dispatch({type: CLEAR_PROFILE});
+    //  dispatch({type: CLEAR_PROFILE});
     try {
         const res = await axios.get(`/api/profile/user/${userId}`);
 
@@ -70,7 +70,7 @@ export const getProfileById = userId => async dispatch => {
 // Get Github repos
 export const getGithubRepos = username => async dispatch => {
      //so one think i want to do that when user go to the profile list page i want to clear whatever in the current profile bcs when we visit single user profile its gonna go into the stage
-     dispatch({type: CLEAR_PROFILE});
+    //  dispatch({type: CLEAR_PROFILE});
     try {
         const res = await axios.get(`/api/profile/github/${username}`);
 
@@ -91,7 +91,7 @@ export const getGithubRepos = username => async dispatch => {
 //now we passed couple of parameter here - and another thing we can do is that redirect after submit the form so for this we pass the   object which has the method called push that will redirect us to client side route.
 //and then inorder to know the updating, editing or creating a new profile i am gonna have the parameter 'edit=false'
 // pass the history object that have a push medthod which will redirect us to any page which we were passing into push method
-export const createProfile = (formData, edit=false) => async dispatch => {
+export const createProfile = (formData,history, edit=false) => async dispatch => {
     try {
         //since we are sending data we need to create config object
         const config = {
@@ -112,27 +112,27 @@ export const createProfile = (formData, edit=false) => async dispatch => {
         //what we can do next that is we edditing it i am not gonna redirect it i stay on the page and if were creating it  then i wanna redirect 
         if(!edit) {
             // pass the history object that have a push medthod which will redirect us to any page which we were passing into push method
-            // history.push('/dashboard');
-            Redirect('/dashboard');
+            history.push('/dashboard');
+            // Redirect('/dashboard');
         }
     } catch (err) {
-        console.log(err.message)
-        // const errors = err.response.data.errors;
-        // if (errors) {
-        //   //for each error dispatch alert
-        //   errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-        // }
+        // console.log(err.message)
+        const errors = err.response.data.errors;
+        if (errors) {
+          //for each error dispatch alert
+          errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+        }
 
-        // dispatch({
-        //     type: PROFILE_ERROR,
-        //     payload: {msg: err.response.statusText, status: err.response.status}
-        // });
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        });
     }
 };
 
 //Add Experience
 //use history method to redirect back to the dashboard 
-export const addExperience = (formData) => async dispatch => {
+export const addExperience = (formData,history) => async dispatch => {
     try {
         //since we are sending data we need to create config object
         const config = {
@@ -151,8 +151,8 @@ export const addExperience = (formData) => async dispatch => {
         dispatch(setAlert('Experience Added', 'succes'));
 
         //what we can do next that is we edditing it i am not gonna redirect it i stay on the page and if were creating it  then i wanna redirect 
-            // history.push('/dashboard');
-            Redirect('/dashboard');
+            history.push('/dashboard');
+            // Redirect('/dashboard');
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
@@ -168,7 +168,7 @@ export const addExperience = (formData) => async dispatch => {
 } 
 //Add Education
 //use history method to redirect back to the dashboard 
-export const addEducation = (formData) => async dispatch => {
+export const addEducation = (formData,history) => async dispatch => {
     try {
         //since we are sending data we need to create config object
         const config = {
@@ -187,9 +187,10 @@ export const addEducation = (formData) => async dispatch => {
         dispatch(setAlert('Education Added', 'succes'));
 
         //what we can do next that is we edditing it i am not gonna redirect it i stay on the page and if were creating it  then i wanna redirect 
-            // history('/dashboard');
-            Redirect('/dashboard');
+            history('/dashboard');
+            // Redirect('/dashboard');
     } catch (err) {
+        console.log(err.message)
         const errors = err.response.data.errors;
         if (errors) {
           //for each error dispatch alert
@@ -244,11 +245,11 @@ export const deleteEducation = id => async dispatch => {
 };
 
 //Delete Account & profile
-export const deleteAccount = id => async dispatch => {
+export const deleteAccount = () => async dispatch => {
     if(window.confirm('Are you sure? This can NOT be undone!'))
     {
     try {
-        const res = await axios.delete('/api/profile');
+        await axios.delete('/api/profile');
 
         dispatch({
             type: CLEAR_PROFILE,

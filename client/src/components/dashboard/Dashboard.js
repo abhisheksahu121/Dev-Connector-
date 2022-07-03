@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import { Link } from "react-router-dom";
-import { DashboardActions } from "./DashboardActions";
+import DashboardActions from "./DashboardActions";
 import Experience from "./Experience";
 import Education from "./Education";
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
   auth: { user },
-  profile: { profile, loading },
+  profile: { profile, loading }
 }) => {
   useEffect(() => {
     getCurrentProfile();

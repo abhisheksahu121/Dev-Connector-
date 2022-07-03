@@ -17,7 +17,7 @@ import Profile from "./components/profile/Profile";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store";
-import { loaduser } from "./actions/auth";
+import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 
@@ -28,7 +28,7 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     //the way by which we can dispatch the loaduser action from here is by taking the store directory and then we just call dispatch and pass in loaduser
-    store.dispatch(loaduser());
+    store.dispatch(loadUser());
   }, []); //second parameter pass as empty bcs doing this will make it so that it only run ones
   return (
     <Provider store={store}>
@@ -39,27 +39,29 @@ const App = () => {
           {/* <Alert/> */}
           {/* <section> */}
           <Navbar />
-          <Route exact path="/" element={<Landing />} />
+          {/* <Landing/> */}
+          <Route exact path="/" component={Landing} />
           <section className="container">
             <Alert />
             <Switch>
-              <Route exact path="/register" element={<Register />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/profiles" element={<Profiles />} />
-              <Route exact path="/profile/:id" element={<Profile />} />
-              <PrivateRoute exact path="/dashboard" element={<Dashboard />} />
+              <Route exact path="/register" component={Register} />
+              {/* <Route exact path="/login" element={<Login />} /> */}
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profiles" component={Profiles}/>
+              <Route exact path="/profile/:id" component={Profile} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute
                 exact
                 path="/create-profile"
-                element={<CreateProfile />}
+                component={CreateProfile}
               />
               <PrivateRoute
                 exact
                 path="/edit-profile"
-                element={<EditProfile />}
+                component={EditProfile}
               />
-              <Route exact path="/add-experience" element={<AddExperience />} />
-              <Route exact path="/add-education" element={<AddEducation />} />
+              <PrivateRoute exact path="/add-experience" component={AddExperience} />
+              <PrivateRoute exact path="/add-education" component={AddEducation} />
             </Switch>
           </section>
           {/* </section>   */}
