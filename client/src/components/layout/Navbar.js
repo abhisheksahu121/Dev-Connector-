@@ -39,13 +39,16 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <li>
         <Link to="/login">Login</Link>
       </li>
+      <li>
+        <Link to="/dataset">Admin</Link>
+      </li>
     </ul>
   );
   return (
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
-          <i className="fas fa-code"></i> DevConnector
+          <i className="fas fa-code"></i> ConnectwithDev
         </Link>
       </h1>
       {!loading && (

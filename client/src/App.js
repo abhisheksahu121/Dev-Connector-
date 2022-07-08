@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import { Routes } from "./components/routing/Routes";
-// import Piechart from './Admin/Piechart';
+// import ChartContainer from "./Admin/Piechart";
+import PieRechartComponent from "./Admin/Piechart";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -31,6 +32,7 @@ const App = () => {
           <Navbar />
           {/* <Landing/> */}
           <Switch>
+            <Route exact path="/dataset" component={PieRechartComponent}/>
             <Route exact path="/" component={Landing} />
             <Route component={Routes} />
           </Switch>

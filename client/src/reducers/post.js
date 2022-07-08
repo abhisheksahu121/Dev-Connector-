@@ -1,4 +1,4 @@
-import { post } from "request";
+// import { post } from "request";
 import {
   GET_POSTS,
   POST_ERROR,
@@ -79,7 +79,7 @@ export default function (state = initialState, action) {
             ...state,
             post: {
                 ...state.post,
-                comments: state/post.comments.filter(comment => comment._id !== payload)
+                comments: state.post.comments.filter(comment => comment._id !== payload)
             },
             loading: false
         }
