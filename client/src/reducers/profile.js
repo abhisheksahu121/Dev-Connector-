@@ -7,13 +7,15 @@ import {
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   GET_PROFILES,
-  GET_REPOS
+  GET_REPOS,
+  SKILL_DATA
 } from "../actions/types";
 
 const initialState = {
   profile: null, //so when we make a request all our data put in there and if we want to see another user profile it will also put that in
   profiles: [], //empty array to begin with and show the list of all profile
   repos: [], //we need to fetch repos
+  skill: [],
   loading: true, //true bydefault once we make a request set it to false
   error: {} //error object for any error in the object
 };
@@ -53,6 +55,12 @@ export default function (state = initialState, action) {
         ...state,
         repos: payload,
         loading: false,
+        };
+    case SKILL_DATA: 
+        return {
+          ...state,
+          skill: payload,
+          loading: false
         }
     default:
       return state;

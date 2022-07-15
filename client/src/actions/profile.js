@@ -1,5 +1,6 @@
 //we are gone to making request so bring in axios
 import axios from "axios";
+// import { json } from "express/lib/response";
 // import  history from 'react-router-dom';
 import { setAlert } from "./alert";
 
@@ -11,6 +12,7 @@ import {
   PROFILE_ERROR,
   UPDATE_PROFILE,
   GET_REPOS,
+  SKILL_DATA
   // ACCOUNT_DELETED
 } from "./types";
 
@@ -273,5 +275,70 @@ export const deleteAccount = () => async (dispatch) => {
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
+  }
+};
+
+//get the ML Skill of users
+export const getMLuser = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/profile/getSkillDataofml');
+    // const payload = json.stringify(res.data)
+    console.log(res)
+    return res;
+    // dispatch({
+    //   type: SKILL_DATA,
+    //   payload: res.data
+    // })
+    
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    })
+  }
+};
+//get the ML Skill of users
+export const getAIuser = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/profile/getSkillDataofai');
+    dispatch({
+      type: SKILL_DATA,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    })
+  }
+};
+//get the ML Skill of users
+export const getJSuser = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/profile/getSkillDataofjs');
+    dispatch({
+      type: SKILL_DATA,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    })
+  }
+};
+//get the ML Skill of users
+export const getCSSuser = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/profile/getSkillDataofcss');
+    dispatch({
+      type: SKILL_DATA,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    })
   }
 };

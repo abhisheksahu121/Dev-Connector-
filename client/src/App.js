@@ -4,7 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import { Routes } from "./components/routing/Routes";
 // import ChartContainer from "./Admin/Piechart";
-import PieRechartComponent from "./Admin/Piechart";
+import PieRechartComponent from "./components/Admin/Piechart";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store";
