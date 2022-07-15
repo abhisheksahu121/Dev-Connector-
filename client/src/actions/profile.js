@@ -297,7 +297,7 @@ export const getMLuser = () => async (dispatch) => {
     })
   }
 };
-//get the ML Skill of users
+//get the AI Skill of users
 export const getAIuser = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/profile/getSkillDataofai');
@@ -312,7 +312,7 @@ export const getAIuser = () => async (dispatch) => {
     })
   }
 };
-//get the ML Skill of users
+//get the JS Skill of users
 export const getJSuser = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/profile/getSkillDataofjs');
@@ -327,7 +327,7 @@ export const getJSuser = () => async (dispatch) => {
     })
   }
 };
-//get the ML Skill of users
+//get the CSS Skill of users
 export const getCSSuser = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/profile/getSkillDataofcss');

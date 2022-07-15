@@ -13,13 +13,15 @@ class PieRechartComponent extends React.Component {
       ML : 0,
       AI : 0,
       JS : 0,
-      CSS : 0
+      CSS : 0,
+      HTML : 0
    }
    componentWillMount = () => {
       this.getMLuser1();
-      this.getMLuser2();
-      this.getMLuser3();
-      this.getMLuser4();
+      this.getAIuser2();
+      this.getJSuser3();
+      this.getCSSuser4();
+      this.getHTMLuser5();
    }
 
    getMLuser1 = async() => {
@@ -30,7 +32,7 @@ class PieRechartComponent extends React.Component {
          console.log(err);
       }
    };
-   getMLuser2 = async() => {
+   getAIuser2 = async() => {
       try {
          const res = await axios.get('/api/profile/getSkillDataofai');
          this.setState({AI:res.data[0].totalCount});
@@ -38,7 +40,7 @@ class PieRechartComponent extends React.Component {
          console.log(err);
       }
    };
-   getMLuser3 = async() => {
+   getJSuser3 = async() => {
       try {
          const res = await axios.get('/api/profile/getSkillDataofjs');
          this.setState({JS:res.data[0].totalCount});
@@ -46,10 +48,18 @@ class PieRechartComponent extends React.Component {
          console.log(err);
       }
    };
-   getMLuser4 = async() => {
+   getCSSuser4 = async() => {
       try {
          const res = await axios.get('/api/profile/getSkillDataofcss');
          this.setState({CSS:res.data[0].totalCount});
+      } catch (err) {
+         console.log(err);
+      }
+   };
+   getHTMLuser5 = async() => {
+      try {
+         const res = await axios.get('/api/profile/getSkillDataofhtmpl');
+         this.setState({HTML:res.data[0].totalCount});
       } catch (err) {
          console.log(err);
       }
@@ -75,11 +85,12 @@ class PieRechartComponent extends React.Component {
    return null;
 };
 render() {
-   var res = this.state.ML + this.state.AI + this.state.JS + this.state.CSS;
-   var ml = ((this.state.ML/res)*100);
-   var ai = ((this.state.AI/res)*100);
-   var js = ((this.state.JS/res)*100);
-   var css = ((this.state.CSS/res)*100);
+   var res = this.state.ML + this.state.AI + this.state.JS + this.state.CSS + this.state.HTML;
+   // var ml = ((this.state.ML/res)*100);
+   // var ai = ((this.state.AI/res)*100);
+   // var js = ((this.state.JS/res)*100);
+   // var css = ((this.state.CSS/res)*100);
+   // let ans =  100 - res;
    var pieData = [
       {
          name: "ML",
@@ -90,20 +101,20 @@ render() {
          value: (this.state.AI/res)*100
       },
       {
-         name: "js",
+         name: "JS",
          value: (this.state.JS/res)*100
       },
       {
-         name: "css",
+         name: "CSS",
          value: (this.state.CSS/res)*100
       },
       {
-         name: "Others",
-         value: 150 - (ml+ai+js+css)
+         name: "HTML",
+         value: (this.state.HTML/res)*100
       }
    ];
    return (
-      
+      <div className="container">
       <PieChart width={730} height={300}>
       <Pie
          data={pieData}
@@ -126,6 +137,7 @@ render() {
       <Profile/>
       <Legend />
       </PieChart>
+      </div>
       );
    }
 }
